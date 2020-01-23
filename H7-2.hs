@@ -48,32 +48,4 @@ instance Log CountLog where
 instance (Log a, Log b) => Log (a,b) where
     logMsg xs = (logMsg xs, logMsg xs)
       
-{- 
-ich hab eine Frage, wenn ich so wie hier schriebe:
-
-instance Semigroup FullLog where
-    FullLog [a] <> FullLog [b] = FullLog ([a] ++ [b])
-instance Monoid FullLog where 
-    mempty = FullLog [] 
-instance Log FullLog where
-    logMsg xs = FullLog [xs]
- 
-=>>> Kriegt man eine (non-exhaustive) patterns Meldung
-
-instance Semigroup FullLog where
-    FullLog [a] <> FullLog [b] = FullLog [a ++ b]
-instance Monoid FullLog where 
-    mempty = FullLog [] 
-instance Log FullLog where
-    logMsg xs = FullLog [xs] 
-
-=>>> Hier kriegt man sowas raus:
-
-     *Main> fib 3 :: (Int, FullLog)
-     (3,FullLog ["fib 1fib 0fib 2fib 1fib 3"]) 
-
-Ich versteh nicht , warum es diese Unterschiede gibt nur wegen der Position von []
-Wäre nett wenn Sie mir das erklären könnten.
--}
-
 
